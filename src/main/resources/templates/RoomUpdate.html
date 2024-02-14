@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Room</title>
+</head>
+<body>
+
+
+<h2>Edit Room</h2>
+
+<form th:action="@{/saveUpdatedRoom}" method="post" th:object="${roomInfo}" enctype="multipart/form-data">
+    <input type="hidden" th:field="*{id}"/>
+    <label for="name">Name:</label>
+    <input type="text" id="name" th:field="*{name}" required><br>
+
+    <label for="city">City:</label>
+    <input type="text" id="city" th:field="*{city}" required><br>
+
+
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address" th:field="*{address}" required><br>
+
+    <label for="mobileNo">Mobile No:</label>
+    <input type="text" id="MobileNo" name="MobileNo" th:field="*{MobileNo}" required><br>
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" th:field="*{description}" rows="4" required></textarea><br>
+
+    <label for="type">Type:</label>
+    <input type="text" id="type" name="type" th:field="*{type}" required><br>
+
+    <label for="rent">Rent:</label>
+    <input type="number" id="rent" name="rent" th:field="*{rent}" required><br>
+
+    <label for="imageFile">Profile Image:</label>
+    <input type="file" id="imageFile" name="imageFile" onchange="previewImage(this)" required><br>
+
+    <img id="imagePreview" th:src="${imagePreview}" alt="Image Preview" style="max-width: 200px; max-height: 200px; display: none;"><br>
+<!--    <th:block th:if="${roomInfo.isPresent()}">-->
+<!--    <img id="preImage" th:if="${roomInfo.get().profileImage}" th:src="@{'/images/' + ${roomInfo.profileImage}}" alt="Image Preview" style="max-width: 200px; max-height: 200px;">-->
+<!--    </th:block>-->
+
+    <button type="submit">Save</button>
+</form>
+
+<script>
+    function previewImage(input) {
+        var preview = document.getElementById('imagePreview');
+        var file = input.files[0];
+
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+
+    }
+</script>
+
+
+</body>
+</html>

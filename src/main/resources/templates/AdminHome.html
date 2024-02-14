@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Room List</title>
+</head>
+<body>
+
+<h2>Room List</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>City</th>
+        <th>Address</th>
+        <th>MobileNo</th>
+            <th>Description</th>
+            <th>Type</th>
+        <th>Rent</th>
+        <th></th>
+
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="room : ${roomList}">
+
+        <td th:text="${room.name}"></td>
+        <td th:text="${room.city}"></td>
+        <td th:text="${room.address}"></td>
+        <td th:text="${room.MobileNo}"></td>
+        <td th:text="${room.description}"></td>
+        <td th:text="${room.type}"></td>
+        <td th:text="${room.rent}"></td>
+       <td ><img  th:src="@{'/images/' + ${room.profileImage}}" alt="Image Preview" style="max-width: 200px; max-height: 200px;"></td>
+
+        <td>
+            <a th:href="@{/edit/{id}(id=${room.id})}">Edit</a>
+            <a th:href="@{/delete/{id}(id=${room.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/edit/AddRoom}">Add New Room</a>
+
+</body>
+</html>

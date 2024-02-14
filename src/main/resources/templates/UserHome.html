@@ -1,0 +1,178 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    &lt;!&ndash; Your CSS styles here &ndash;&gt;-->
+<!--    <style>-->
+<!--        div.gallery {-->
+<!--          border: 1px solid #ccc;-->
+<!--        }-->
+
+<!--        div.gallery:hover {-->
+<!--          border: 1px solid #777;-->
+<!--        }-->
+
+<!--        div.gallery img {-->
+<!--          width: 100%;-->
+<!--          height: 100px;-->
+<!--          object-fit: cover;-->
+<!--        }-->
+
+<!--        div.desc {-->
+<!--          padding: 15px;-->
+<!--          text-align: center;-->
+<!--        }-->
+
+<!--        * {-->
+<!--          box-sizing: border-box;-->
+<!--        }-->
+
+<!--        .responsive {-->
+<!--          padding: 0 6px;-->
+<!--          float: left;-->
+<!--          width: 24.99999%;-->
+<!--        }-->
+
+<!--        @media only screen and (max-width: 700px) {-->
+<!--          .responsive {-->
+<!--            width: 49.99999%;-->
+<!--            margin: 6px 0;-->
+<!--          }-->
+<!--        }-->
+
+<!--        @media only screen and (max-width: 500px) {-->
+<!--          .responsive {-->
+<!--            width: 100%;-->
+<!--          }-->
+<!--        }-->
+
+<!--        .clearfix:after {-->
+<!--          content: "";-->
+<!--          display: table;-->
+<!--          clear: both;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<h2>Responsive Image Gallery</h2>-->
+
+<!--<h4>Resize the browser window to see the effect.</h4>-->
+
+<!--<div th:each="rooms : ${data}" class="responsive">-->
+<!--    <div class="gallery">-->
+<!--        <a target="_blank" th:href="@{'/images/' + ${rooms.profileImage}}" th:src="@{'/images/' + ${rooms.profileImage}}"-->
+<!--           alt="Image">-->
+<!--            <img th:src="@{'/images/' + ${rooms.profileImage}}" alt="Image"/>-->
+<!--        </a>-->
+<!--        <div class="desc" th:text="${rooms.name}">  </div>-->
+<!--        <div class="desc" th:text="${rooms.city}">  </div>-->
+<!--        <div class="desc" th:text="${rooms.rent}">  </div>-->
+
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div class="clearfix"></div>-->
+
+<!--<div style="padding:6px;">-->
+<!--    <p>This example uses media queries to re-arrange the images on different screen sizes: for screens larger than 700px wide, it will show four images side by side, for screens smaller than 700px, it will show two images side by side. For screens smaller than 500px, the images will stack vertically (100%).</p>-->
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+
+        html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.column {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  padding: 0 16px;
+}
+
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.title {
+  color: grey;
+}
+
+
+.card img {
+    width: 100%;
+   height: 200px;
+   object-fit: cover;
+   }
+
+
+.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: #555;
+}
+    </style>
+</head>
+<body>
+
+
+<br>
+
+<div class="row">
+    <div class="column" th:each="room : ${data}">
+        <div class="card">
+            <img th:src="@{'/images/' + ${room.profileImage}}" alt="Image"/>
+            <div class="container">
+                <a th:href="@{/user/productDetails/{id}(id=${room.id})}">
+                    <h2 th:text="${room.name}"></h2>
+                </a>
+                <p class="title" th:text="${room.city}"></p>
+
+                <p th:text="${room.rent}"></p>
+                <p><button class="button">Contact</button></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
